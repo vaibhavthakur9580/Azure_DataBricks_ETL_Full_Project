@@ -16,22 +16,20 @@ application_id = "8bd099b1-ca21-4122-9649-4753d7bcdab1"
 directory_id = "dc60f1e9-6082-416e-9df7-dfe400bc7936"
 service_credential = "lpn8Q~cryEuHDyZLHG71J975SiWSVVXXHGOkrbJj"
 
-print("📋 METHOD 4: Direct OAuth Configuration")
+print(" Direct OAuth Configuration")
 try:
     spark.conf.set(f"fs.azure.account.auth.type.{storage_account}.dfs.core.windows.net", "OAuth")
     spark.conf.set(f"fs.azure.account.oauth.provider.type.{storage_account}.dfs.core.windows.net", "org.apache.hadoop.fs.azurebfs.oauth2.ClientCredsTokenProvider")
     spark.conf.set(f"fs.azure.account.oauth2.client.id.{storage_account}.dfs.core.windows.net", application_id)
     spark.conf.set(f"fs.azure.account.oauth2.client.secret.{storage_account}.dfs.core.windows.net", service_credential)
     spark.conf.set(f"fs.azure.account.oauth2.client.endpoint.{storage_account}.dfs.core.windows.net", f"https://login.microsoftonline.com/{directory_id}/oauth2/token")
-    print("✅ Direct OAuth method configured!")
+    print("Direct OAuth method configured!")
     
     # Test connection (uncomment when ready)
     # dbutils.fs.ls(f"abfss://your-container@{storage_account}.dfs.core.windows.net/")
     
 except Exception as e:
-    print(f"❌ Direct OAuth method failed: {e}")
-
-print("\n" + "="*60)
+    print(f"Direct OAuth method failed: {e}")
 
 
 
